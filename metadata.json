@@ -1,0 +1,10 @@
+{
+  "name": "ORI Agent",
+  "description": "A high-performance landing page for an AI-native agentic chatbot SaaS, featuring live Gemini-powered demo interactions.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
