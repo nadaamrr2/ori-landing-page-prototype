@@ -13,13 +13,13 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate, isDarkMode }) => {
       name: 'Starter',
       price: '$49',
       period: 'per month',
-      description: 'Ideal for small operations or testing initial agent deployments.',
+      description: 'Ideal for individuals, professionals, or anyone building and testing their first AI agent.',
       features: [
         '1 Active AI Agent',
         '1,000 Conversations / mo',
-        'Website Widget Integration',
+        'Web Links & File Uploads (up to 50MB)',
+        'Website Chat Widget',
         'Standard Email Support',
-        'Knowledge Base (up to 50MB)',
       ],
       cta: 'Start with Starter',
       popular: false,
@@ -28,14 +28,15 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate, isDarkMode }) => {
       name: 'Pro',
       price: '$149',
       period: 'per month',
-      description: 'Perfect for growing brands looking to automate multi-channel systems.',
+      description: 'For professionals and growing teams running multiple agents or more advanced workflows.',
       features: [
         '3 Active AI Agents',
         '10,000 Conversations / mo',
-        'Shopify & HubSpot Integrations',
-        'Self-Correction Safeguards',
-        'Priority Email & Slack Support',
+        'Google Drive & OneDrive Knowledge',
+        'Google Calendar, Shopify & HubSpot Tools',
+        'Website Chat, Instagram & WhatsApp Channels',
         'Knowledge Base (up to 1GB)',
+        'Priority Support',
       ],
       cta: 'Go Pro Today',
       popular: true,
@@ -44,12 +45,12 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate, isDarkMode }) => {
       name: 'Enterprise',
       price: 'Custom',
       period: 'tailored pricing',
-      description: 'Designed for enterprise-scale platforms requiring maximum control.',
+      description: 'For organizations requiring larger-scale deployments, advanced integrations, governance, or custom requirements.',
       features: [
         'Unlimited AI Agents',
         'Custom Conversations Volume',
-        'All Core Integrations',
-        'Full Cognitive Memory Engine',
+        'All Knowledge Sources & Tools',
+        'Advanced Guardrails & Oversight',
         'Dedicated Solutions Architect',
         'Custom Knowledge Bases & APIs',
       ],
@@ -63,10 +64,10 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate, isDarkMode }) => {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-          Flexible Plans for Every Team
+          Plans That Scale With Your Agents
         </h2>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-          Start for free, then upgrade as your volume grows. All plans are simple, transparent, and built to scale with your brand.
+          Start with one agent, then expand as your needs grow. Simple plans for individuals, professionals, teams, and organizations.
         </p>
       </div>
 

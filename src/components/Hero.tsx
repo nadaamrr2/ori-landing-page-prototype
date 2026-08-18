@@ -23,18 +23,18 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, isDarkMode }) => {
 
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-6">
-            AI agents that <br className="hidden sm:inline" />
-            understand your business <br className="hidden sm:inline" />
-            and <span className="gradient-text">take action.</span>
+            AI agents built around <br className="hidden sm:inline" />
+            what you know and what <br className="hidden sm:inline" />
+            you <span className="gradient-text">need them to do.</span>
           </h1>
 
           {/* Subtext */}
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-            Build AI agents that connect to your knowledge, tools, and workflows to help teams automate complex tasks across the business.
+            Create specialized AI agents grounded in your knowledge, guided by your instructions, and connected to the tools they need to get work done.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
             <button
               onClick={() => onNavigate('signup')}
               id="hero-cta-signup"
@@ -42,6 +42,19 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, isDarkMode }) => {
             >
               <span>Get Started Free</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                const demoElement = document.getElementById('demo');
+                if (demoElement) {
+                  demoElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+              id="hero-cta-demo"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-all cursor-pointer"
+            >
+              <span>See ORI in Action</span>
             </button>
           </div>
         </div>

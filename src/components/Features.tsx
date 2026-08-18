@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, FileText, Cpu, ShieldCheck } from 'lucide-react';
+import { Target, FileText, Cpu, ShieldCheck } from 'lucide-react';
 
 interface FeaturesProps {
   isDarkMode: boolean;
@@ -8,32 +8,32 @@ interface FeaturesProps {
 const Features: React.FC<FeaturesProps> = ({ isDarkMode }) => {
   const featureList = [
     {
-      id: 'feature-config',
-      icon: Settings,
-      title: 'Configure ORI Around Your Business',
-      description: 'Set each agent’s primary goal, instructions, use cases, knowledge, connected channels, and permitted actions.',
-      badge: 'Controls'
+      id: 'feature-purpose',
+      icon: Target,
+      title: 'Define Its Purpose',
+      description: "Set the agent's primary goal, instructions, tone, rules, and scope around the job you want it to perform.",
+      badge: 'PURPOSE'
     },
     {
       id: 'feature-knowledge',
       icon: FileText,
-      title: 'Grounded in Your Knowledge',
-      description: 'Connect websites and upload files such as PDFs so ORI can answer and perform tasks using your actual business information.',
-      badge: 'Knowledge'
+      title: 'Ground It in Your Knowledge',
+      description: 'Give the agent context using uploaded files, links, Google Drive, and Microsoft OneDrive.',
+      badge: 'KNOWLEDGE'
     },
     {
       id: 'feature-tools',
       icon: Cpu,
-      title: 'Connect Tools and Take Action',
-      description: 'Allow agents to retrieve information and perform supported actions through Shopify, HubSpot, Freshdesk, Instagram, and your website chat widget.',
-      badge: 'Integrations'
+      title: 'Connect Tools & Take Action',
+      description: 'Connect supported tools such as Google Calendar, Shopify, HubSpot, and Freshdesk so the agent can retrieve information and perform actions when needed.',
+      badge: 'TOOLS'
     },
     {
       id: 'feature-oversight',
       icon: ShieldCheck,
-      title: 'Human Oversight and Guardrails',
-      description: 'Define what the agent is allowed to do and escalate conversations to a human when review, approval, or personal intervention is required.',
-      badge: 'Oversight'
+      title: 'Keep You in Control',
+      description: 'Define the boundaries the agent operates within and involve a human whenever judgment, approval, or intervention is required.',
+      badge: 'OVERSIGHT'
     },
   ];
 
@@ -42,10 +42,10 @@ const Features: React.FC<FeaturesProps> = ({ isDarkMode }) => {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4 animate-fade-in">
-          Built Around Your Business
+          Built Around Your Purpose
         </h2>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-          Configure ORI with your goals, knowledge, instructions, and connected tools so it can answer, take action, and escalate within the boundaries you define.
+          Configure each ORI agent around what it needs to know, how it should behave, and what tools it can use.
         </p>
       </div>
 
@@ -71,7 +71,7 @@ const Features: React.FC<FeaturesProps> = ({ isDarkMode }) => {
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                       {feature.title}
                     </h3>
-                    <span className="inline-block text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-100/30 dark:border-blue-900/10">
+                    <span className="inline-block text-[10px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-100/30 dark:border-blue-900/10">
                       {feature.badge}
                     </span>
                   </div>

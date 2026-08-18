@@ -5,6 +5,7 @@ import Features from './components/Features';
 import AgentDemo from './components/AgentDemo';
 import Integrations from './components/Integrations';
 import HowItWorks from './components/HowItWorks';
+import UseCases from './components/UseCases';
 import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
 import ContactUs from './components/ContactUs';
@@ -18,14 +19,52 @@ import TermsOfService from './components/TermsOfService';
 
 export type View = 'landing' | 'signup' | 'login' | 'onboarding' | 'dashboard' | 'privacy' | 'terms' | 'contact';
 
+const getViewFromPath = (): View => {
+  const path = window.location.pathname.toLowerCase();
+  if (path === '/privacy-policy' || path === '/privacy') return 'privacy';
+  if (path === '/contact') return 'contact';
+  if (path === '/signup') return 'signup';
+  if (path === '/login') return 'login';
+  if (path === '/onboarding') return 'onboarding';
+  if (path === '/dashboard') return 'dashboard';
+  return 'landing';
+};
+
+const getPathFromView = (view: View): string => {
+  switch (view) {
+    case 'privacy':
+      return '/privacy-policy';
+    case 'contact':
+      return '/contact';
+    case 'signup':
+      return '/signup';
+    case 'login':
+      return '/login';
+    case 'onboarding':
+      return '/onboarding';
+    case 'dashboard':
+      return '/dashboard';
+    default:
+      return '/';
+  }
+};
+
 const App: React.FC = () => {
-  const [view, setView] = useState<View>('landing');
+  const [view, setView] = useState<View>(() => getViewFromPath());
   const [activeSection, setActiveSection] = useState('hero');
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('agentic_theme');
     // Default to false (light mode)
     return saved !== null ? saved === 'dark' : false;
   });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setView(getViewFromPath());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -45,6 +84,10 @@ const App: React.FC = () => {
 
   const navigateTo = (newView: View) => {
     setView(newView);
+    const targetPath = getPathFromView(newView);
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -52,7 +95,7 @@ const App: React.FC = () => {
     if (view !== 'landing') return;
 
     const handleScroll = () => {
-      const sections = ['hero', 'features', 'integrations', 'how-it-works', 'pricing', 'customers', 'contact'];
+      const sections = ['hero', 'features', 'integrations', 'how-it-works', 'use-cases', 'pricing', 'customers', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -112,22 +155,26 @@ const App: React.FC = () => {
               <AgentDemo />
             </section>
 
-            <section id="pricing" className={`py-24 border-t border-slate-100 dark:border-slate-900/60 ${isDarkMode ? 'bg-slate-950/20' : 'bg-slate-50/50'}`}>
+            <section id="use-cases" className={`py-24 border-t border-slate-100 dark:border-slate-900/60 ${isDarkMode ? 'bg-slate-950/20' : 'bg-slate-50/50'}`}>
+              <UseCases />
+            </section>
+
+            <section id="pricing" className="py-24 border-t border-slate-100 dark:border-slate-900/60 relative overflow-hidden">
               <Pricing onNavigate={navigateTo} isDarkMode={isDarkMode} />
             </section>
 
-            <section id="customers" className="py-24 border-t border-slate-100 dark:border-slate-900/60 relative overflow-hidden">
+            <section id="customers" className={`py-24 border-t border-slate-100 dark:border-slate-900/60 ${isDarkMode ? 'bg-slate-950/20' : 'bg-slate-50/50'}`}>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
               <Testimonials />
             </section>
 
-            <section id="contact" className={`py-20 border-t border-slate-100 dark:border-slate-900/60 ${isDarkMode ? 'bg-slate-950/20' : 'bg-slate-50/50'}`}>
+            <section id="contact" className="py-20 border-t border-slate-100 dark:border-slate-900/60 relative overflow-hidden">
               <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center py-6">
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-                  Ready to see how ORI can support your business?
+                  Ready to build your first ORI agent?
                 </h2>
                 <p className="text-base text-slate-600 dark:text-slate-400 mb-8 max-w-xl mx-auto">
-                  Tell us about your needs and our team will get in touch.
+                  Tell us what you want your agent to know and what you need it to do.
                 </p>
                 <button
                   onClick={() => navigateTo('contact')}

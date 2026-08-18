@@ -11,12 +11,22 @@ interface Message {
   attachment?: string;
 }
 
+interface SamplePrompt {
+  label: string;
+  text: string;
+  reply: string;
+  thoughts: string[];
+  tools: { name: string; args: string; result: string }[];
+  response: string;
+  attachment?: string;
+}
+
 const AgentDemo: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'msg-1',
       sender: 'agent',
-      text: 'Hello! I am ORI, your autonomous customer specialist. I can look up orders, process refunds, and solve product queries. Try choosing one of the demo prompts below to see my agentic workflows in action!',
+      text: "Hi, I'm ORI. I'm an AI agent configured with knowledge, instructions, and connected tools. Choose a scenario below to see how different ORI agents can work.",
       timestamp: 'Just now',
     },
   ]);
@@ -34,71 +44,88 @@ const AgentDemo: React.FC = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const samplePrompts = [
+  const samplePrompts: SamplePrompt[] = [
     {
-      label: '📦 Check Shipping Status',
-      text: 'Can you check where my order #SH-9923 is? It was supposed to arrive yesterday.',
-      reply: 'Let me query our Shopify inventory and carrier databases for Order #SH-9923.',
+      label: '📄 Search Knowledge',
+      text: 'Can you find the key takeaways from the Q3 Strategy Report in my connected Google Drive?',
+      reply: 'Querying connected Google Drive knowledge base for the Q3 Strategy Report.',
       thoughts: [
-        'Recognized intent: order_tracking',
-        'Extracting entities: order_id = "SH-9923"',
-        'Invoking ShopifyAPI.getOrderDetails({ orderId: "SH-9923" })',
-        'Validating carrier timeline details against actual day of delivery',
-        'Self-Correction trigger: Notice carrier update states package was delayed by customs, correcting default "out for delivery" draft answer.',
+        'Recognized intent: document_search',
+        'Querying Knowledge Base (Google Drive integration)',
+        'Extracting top semantic matches from "Q3_Strategy_Report.pdf"',
+        'Synthesizing concise bullet points adhering to configured summary instructions',
+      ],
+      tools: [
+        {
+          name: 'KnowledgeBase.search',
+          args: '{"source": "Google Drive", "query": "Q3 Strategy Report key takeaways"}',
+          result: '{"matches": 3, "top_document": "Q3_Strategy_Report.pdf", "confidence": 0.98}',
+        },
+      ],
+      response: 'Based on the Q3 Strategy Report retrieved from your connected Google Drive, here are the key takeaways:\n\n• Expansion: Core initiatives are on track with a 24% increase in user adoption across all regions.\n• Priorities: Accelerate tool integrations and rollout automated scheduling workflows.\n• Efficiency: Team operational overhead was reduced by 35% following agent deployment.',
+    },
+    {
+      label: '📅 Schedule a Meeting',
+      text: 'Find an available time tomorrow afternoon and create a 30-min strategy review with Sarah.',
+      reply: 'Checking your Google Calendar availability for tomorrow afternoon.',
+      thoughts: [
+        'Recognized intent: schedule_event',
+        'Extracting entities: date="tomorrow", time_window="afternoon", duration=30, attendee="Sarah"',
+        'Invoking GoogleCalendarAPI.checkAvailability({ date: "tomorrow", window: "13:00-17:00" })',
+        'Identified open slot at 2:30 PM',
+        'Invoking GoogleCalendarAPI.createEvent({ title: "Strategy Review with Sarah", start: "14:30", duration: 30 })',
+      ],
+      tools: [
+        {
+          name: 'GoogleCalendarAPI.checkAvailability',
+          args: '{"date": "2026-08-18", "window": "afternoon"}',
+          result: '{"available_slots": ["14:30-15:00", "16:00-16:30"]}',
+        },
+        {
+          name: 'GoogleCalendarAPI.createEvent',
+          args: '{"summary": "Strategy Review with Sarah", "start": "2026-08-18T14:30:00", "attendees": ["sarah@company.com"]}',
+          result: '{"status": "confirmed", "event_id": "cal_evt_9812", "htmlLink": "https://calendar.google.com/event?id=9812"}',
+        },
+      ],
+      response: "I checked your Google Calendar and found an open slot tomorrow afternoon. I have scheduled the 'Strategy Review with Sarah' for tomorrow at 2:30 PM - 3:00 PM and sent calendar invites to both participants.",
+    },
+    {
+      label: '📦 Check an Order',
+      text: 'Check the status of order #1009.',
+      reply: 'Looking up order #1009 in Shopify.',
+      thoughts: [
+        'Recognized intent: order_lookup',
+        'Extracting entities: order_id="1009"',
+        'Invoking ShopifyAPI.getOrderDetails({ orderId: "1009" })',
+        'Verifying delivery estimate and carrier tracking info',
       ],
       tools: [
         {
           name: 'ShopifyAPI.getOrderDetails',
-          args: '{"orderId": "SH-9923"}',
-          result: '{"id": "SH-9923", "status": "In Transit", "carrier": "FedEx", "tracking_no": "9201992348", "eta": "Delayed (Expected Wednesday)"}',
+          args: '{"orderId": "1009"}',
+          result: '{"id": "1009", "status": "In Transit", "carrier": "FedEx", "tracking_no": "94001118992", "eta": "Aug 19, 2026"}',
         },
       ],
-      response: 'I have looked up order #SH-9923 in our systems. According to the Shopify tracking data, the package is handled by FedEx (Tracking #9201992348). It is currently delayed due to custom checks at the transit hub. It is now scheduled to arrive tomorrow afternoon. I have automatically subscribed your email to instant SMS/email delivery alerts.',
+      response: 'I looked up order #1009 in your Shopify store. The order is currently in transit with FedEx (Tracking #94001118992) and is estimated to be delivered on Wednesday, August 19. All tracking updates are synchronized.',
     },
     {
-      label: '💰 Initiate Shopify Refund',
-      text: 'I want a refund for order #RF-1044. The item arrived damaged.',
-      reply: 'I will query the purchase status for Order #RF-1044 and trigger our standard refund workflows.',
+      label: '👥 Find CRM Contact',
+      text: "Find this contact's recent notes and status in HubSpot CRM: Alex Rivera.",
+      reply: 'Searching HubSpot CRM for contact Alex Rivera.',
       thoughts: [
-        'Recognized intent: process_refund',
-        'Extracting entities: order_id = "RF-1044", reason = "damaged"',
-        'Checking refund policy criteria: item cost < $100 AND customer has high loyalty score',
-        'Invoking StripeAPI.issueRefund({ chargeId: "ch_3M49aL" })',
-        'Syncing transaction updates with HubSpot contacts and ticket state.',
+        'Recognized intent: crm_lookup',
+        'Extracting contact: name="Alex Rivera"',
+        'Invoking HubSpotAPI.getContact({ name: "Alex Rivera" })',
+        'Formatting recent lifecycle stage and activity logs',
       ],
       tools: [
         {
-          name: 'ShopifyAPI.getOrderDetails',
-          args: '{"orderId": "RF-1044"}',
-          result: '{"id": "RF-1044", "total": "$65.00", "payment_status": "Paid", "charge_id": "ch_3M49aL", "customer_email": "nada@origin-me.com"}',
-        },
-        {
-          name: 'StripeAPI.issueRefund',
-          args: '{"chargeId": "ch_3M49aL", "amount": 6500}',
-          result: '{"status": "succeeded", "refund_id": "re_4829ad", "refunded_amount": 6500}',
+          name: 'HubSpotAPI.getContact',
+          args: '{"query": "Alex Rivera"}',
+          result: '{"id": "hs_44921", "name": "Alex Rivera", "stage": "Qualified Lead", "last_activity": "Call logged Aug 15", "owner": "Sales Team"}',
         },
       ],
-      response: 'I have successfully verified order #RF-1044 ($65.00) in our Shopify catalog. Since the package was marked damaged, I have initiated a full refund via Stripe (Refund Transaction ID: re_4829ad). The funds will reflect back in your original payment method in 3-5 business days. Your support ticket on HubSpot has been marked as resolved.',
-    },
-    {
-      label: '📸 Upload Receipt Screenshot',
-      text: 'Here is the invoice. Can you confirm if this matches my purchase logs?',
-      reply: 'Processing multimodal image analysis on the provided invoice receipt screenshot.',
-      attachment: 'invoice_screenshot_784.png',
-      thoughts: [
-        'Multimodal input detected: image attachment',
-        'Running optical character recognition (OCR) parsing on invoice layout',
-        'Identified invoice data: Vendor="ORI Inc", Date="2026-07-12", Total="$149.00"',
-        'Invoking Database.queryTransactionHistory({ amount: 149.00, date: "2026-07-12" })',
-      ],
-      tools: [
-        {
-          name: 'OCR.parseImageText',
-          args: '{"image_uri": "invoice_screenshot_784.png"}',
-          result: '{"parsed_text": "INVOICE #INV-8832 - ORI SaaS Plan PRO - Total: $149.00 - Date: July 12, 2026"}',
-        },
-      ],
-      response: 'I have analyzed the attached invoice image (#INV-8832). Using multimodal parsing, I verified a total of $149.00 matching the Pro SaaS Subscription invoice. Our database records confirm this payment was successfully cleared on July 12, 2026. A PDF copy has been uploaded to your billing dashboard records.',
+      response: "I retrieved Alex Rivera's record from HubSpot CRM:\n\n• Lifecycle Stage: Qualified Lead\n• Account Owner: Sales Team\n• Recent Activity: Discovery call logged on August 15 with interest in multi-agent workflows\n• Next Action: Follow-up demo scheduled for next week.",
     },
   ];
 
@@ -125,7 +152,7 @@ const AgentDemo: React.FC = () => {
       const agentMsg: Message = {
         id: `msg-${Date.now() + 1}`,
         sender: 'agent',
-        text: match ? match.response : "I've received your query! As a demonstration agent, I can best assist with tracking orders, triggering refunds, or parsing screenshots. Click one of the quick-actions below to see my full self-correcting workflows!",
+        text: match ? match.response : "I've received your query! As a demonstration agent, I can search knowledge bases, schedule calendar events, look up orders, or query CRM records. Click one of the scenarios below to see me in action!",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         thoughts: match ? match.thoughts : ['Classified query', 'Selecting best-match answer', 'Output clean response'],
         toolsCalled: match ? match.tools : undefined,
@@ -133,7 +160,7 @@ const AgentDemo: React.FC = () => {
 
       setMessages((prev) => [...prev, agentMsg]);
       setIsTyping(false);
-    }, 1500);
+    }, 1200);
   };
 
   const handlePromptClick = (p: typeof samplePrompts[0]) => {
@@ -149,7 +176,7 @@ const AgentDemo: React.FC = () => {
           Experience ORI in Action
         </h2>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-          Interact with a live simulation of a cognitive agent. Witness how ORI checks tools, analyzes documents, and corrects itself in real-time.
+          Explore how an ORI agent can use knowledge, follow instructions, and interact with connected tools in real time.
         </p>
       </div>
 
@@ -164,10 +191,10 @@ const AgentDemo: React.FC = () => {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">ORI E-commerce Agent</h3>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">ORI Workspace Agent</h3>
                   <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                 </div>
-                <p className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold font-mono">MODEL: COGNITIVE SUITE-V2</p>
+                <p className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold font-mono">WORKSPACE AGENT · KNOWLEDGE & TOOLS CONNECTED</p>
               </div>
             </div>
 
@@ -177,7 +204,7 @@ const AgentDemo: React.FC = () => {
                   {
                     id: 'msg-init',
                     sender: 'agent',
-                    text: 'Hello! I am ORI, your autonomous customer specialist. I can look up orders, process refunds, and solve product queries. Try choosing one of the demo prompts below to see my agentic workflows in action!',
+                    text: "Hi, I'm ORI. I'm an AI agent configured with knowledge, instructions, and connected tools. Choose a scenario below to see how different ORI agents can work.",
                     timestamp: 'Just now',
                   },
                 ]);

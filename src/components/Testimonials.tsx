@@ -17,23 +17,23 @@ const testimonialsData: Testimonial[] = [
   {
     id: 'partner-1',
     partnerType: 'Early Access Partner',
-    title: 'E-commerce Merchant Pilot',
-    quote: 'Customer testimonial coming soon. Our teams are currently wrapping up the early access pilot phase with ORI Agent, testing high-volume chat automation and platform self-correction capabilities.',
-    initials: 'EP',
+    title: 'Research & Knowledge Lead',
+    quote: 'Customer testimonial coming soon. Our teams are currently evaluating ORI Agent for grounding specialized assistants on dense documentation, file libraries, and multi-source research archives.',
+    initials: 'RL',
   },
   {
     id: 'partner-2',
     partnerType: 'Pilot Customer',
-    title: 'SaaS Platform Team',
-    quote: 'Customer testimonial coming soon. Currently evaluating automated workflows, contextual CRM synchronization, and conversational memory triggers in a multi-tenant test environment.',
-    initials: 'PC',
+    title: 'Consulting Practice Director',
+    quote: 'Customer testimonial coming soon. Testing automated appointment scheduling via Google Calendar, structured client knowledge intake, and task execution guardrails.',
+    initials: 'CD',
   },
   {
     id: 'partner-3',
     partnerType: 'Early Access Partner',
-    title: 'Digital Agency Director',
-    quote: 'Customer testimonial coming soon. Early stage integrations on website chat widgets and messaging channels have shown promising initial feedback on speed, accuracy, and ease of deployment.',
-    initials: 'AP',
+    title: 'Operations & Support Team',
+    quote: 'Customer testimonial coming soon. Early stage deployments across website chat widgets and connected tools like Shopify and HubSpot have shown fast setup and high instruction adherence.',
+    initials: 'OT',
   },
 ];
 
@@ -46,7 +46,7 @@ const Testimonials: React.FC = () => {
           Trusted by Early Adopters
         </h2>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-          See how companies are preparing to transform their workflows and customer services with ORI’s advanced agentic automation.
+          See how early users are exploring ORI across knowledge, workflows, customer experiences, and specialized AI agent use cases.
         </p>
       </div>
 

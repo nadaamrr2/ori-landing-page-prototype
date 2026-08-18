@@ -21,8 +21,8 @@ const Navbar: React.FC<NavbarProps> = ({
     { label: 'Features', href: '#features', id: 'features' },
     { label: 'Integrations', href: '#integrations', id: 'integrations' },
     { label: 'How It Works', href: '#how-it-works', id: 'how-it-works' },
+    { label: 'Use Cases', href: '#use-cases', id: 'use-cases' },
     { label: 'Pricing', href: '#pricing', id: 'pricing' },
-    { label: 'Customers', href: '#customers', id: 'customers' },
     { label: 'Contact Us', href: '#contact', id: 'contact' },
   ];
 

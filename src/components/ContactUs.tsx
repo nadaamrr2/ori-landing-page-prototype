@@ -6,7 +6,6 @@ interface ContactFormData {
   email: string;
   companyName: string;
   jobTitle: string;
-  companyWebsite: string;
   phoneNumber: string;
   interest: string;
   message: string;
@@ -26,7 +25,6 @@ const ContactUs: React.FC = () => {
     email: '',
     companyName: '',
     jobTitle: '',
-    companyWebsite: '',
     phoneNumber: '',
     interest: '',
     message: '',
@@ -115,7 +113,6 @@ const ContactUs: React.FC = () => {
       email: '',
       companyName: '',
       jobTitle: '',
-      companyWebsite: '',
       phoneNumber: '',
       interest: '',
       message: '',
@@ -129,10 +126,10 @@ const ContactUs: React.FC = () => {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
-          Let’s talk about what ORI can do for your business
+          Let’s talk about what ORI can do for you
         </h1>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
-          Tell us a little about your business, current workflows, and what you would like to automate. Our team will review your request and get in touch.
+          Tell us about your goals, knowledge sources, and what you would like your agent to do. Our team will review your request and get in touch.
         </p>
       </div>
 
@@ -269,26 +266,8 @@ const ContactUs: React.FC = () => {
               </div>
             </div>
 
-            {/* Row 3: Company Website & Phone Number */}
+            {/* Row 3: Phone Number & What are you interested in? */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="companyWebsite" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
-                  <span>Company Website</span>
-                  <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">Optional</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type="url"
-                    id="companyWebsite"
-                    name="companyWebsite"
-                    value={formData.companyWebsite}
-                    onChange={handleChange}
-                    placeholder="https://example.com"
-                    className="w-full bg-slate-50 dark:bg-[#020617]/50 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:border-blue-500 focus:ring-blue-500/20 transition-all text-slate-900 dark:text-white"
-                  />
-                </div>
-              </div>
-
               <div className="space-y-2">
                 <label htmlFor="phoneNumber" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
                   <span>Phone Number</span>
@@ -306,49 +285,48 @@ const ContactUs: React.FC = () => {
                   />
                 </div>
               </div>
-            </div>
 
-            {/* Row 4: What are you interested in? */}
-            <div className="space-y-2">
-              <label htmlFor="interest" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
-                What are you interested in? <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <select
-                  id="interest"
-                  name="interest"
-                  value={formData.interest}
-                  onChange={handleChange}
-                  className={`w-full bg-slate-50 dark:bg-[#020617]/50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer pr-10 text-slate-900 dark:text-white ${
-                    errors.interest
-                      ? 'border-red-500 focus:ring-red-500/20'
-                      : 'border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-blue-500/20'
-                  }`}
-                >
-                  <option value="" disabled className="text-slate-400">Select an option...</option>
-                  <option value="Book a demo" className="text-slate-900 dark:text-white">Book a demo</option>
-                  <option value="Product inquiry" className="text-slate-900 dark:text-white">Product inquiry</option>
-                  <option value="Integration inquiry" className="text-slate-900 dark:text-white">Integration inquiry</option>
-                  <option value="Partnership" className="text-slate-900 dark:text-white">Partnership</option>
-                  <option value="Technical support" className="text-slate-900 dark:text-white">Technical support</option>
-                  <option value="Other" className="text-slate-900 dark:text-white">Other</option>
-                </select>
-                <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
-                  <ChevronDown className="h-4 w-4" />
+              <div className="space-y-2">
+                <label htmlFor="interest" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  What are you interested in? <span className="text-red-500">*</span>
+                </label>
+                <div className="relative">
+                  <select
+                    id="interest"
+                    name="interest"
+                    value={formData.interest}
+                    onChange={handleChange}
+                    className={`w-full bg-slate-50 dark:bg-[#020617]/50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer pr-10 text-slate-900 dark:text-white ${
+                      errors.interest
+                        ? 'border-red-500 focus:ring-red-500/20'
+                        : 'border-slate-200 dark:border-slate-800 focus:border-blue-500 focus:ring-blue-500/20'
+                    }`}
+                  >
+                    <option value="" disabled className="text-slate-400">Select an option...</option>
+                    <option value="Book a demo" className="text-slate-900 dark:text-white">Book a demo</option>
+                    <option value="Product inquiry" className="text-slate-900 dark:text-white">Product inquiry</option>
+                    <option value="Integration inquiry" className="text-slate-900 dark:text-white">Integration inquiry</option>
+                    <option value="Partnership" className="text-slate-900 dark:text-white">Partnership</option>
+                    <option value="Technical support" className="text-slate-900 dark:text-white">Technical support</option>
+                    <option value="Other" className="text-slate-900 dark:text-white">Other</option>
+                  </select>
+                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
                 </div>
+                {errors.interest && (
+                  <div className="flex items-center gap-1 text-xs text-red-500 mt-1.5" id="error-interest">
+                    <AlertCircle className="h-3.5 w-3.5" />
+                    <span>{errors.interest}</span>
+                  </div>
+                )}
               </div>
-              {errors.interest && (
-                <div className="flex items-center gap-1 text-xs text-red-500 mt-1.5" id="error-interest">
-                  <AlertCircle className="h-3.5 w-3.5" />
-                  <span>{errors.interest}</span>
-                </div>
-              )}
             </div>
 
             {/* Row 5: Message */}
             <div className="space-y-2">
               <label htmlFor="message" className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
-                How can ORI support your business? <span className="text-red-500">*</span>
+                How can ORI help you? <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <textarea
@@ -357,7 +335,7 @@ const ContactUs: React.FC = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  placeholder="Tell us about your support volume, channels, or tool integration requirements..."
+                  placeholder="Tell us what you want your agent to know, tools to connect, or workflows to automate..."
                   className={`w-full bg-slate-50 dark:bg-[#020617]/50 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-all resize-none ${
                     errors.message
                       ? 'border-red-500 focus:ring-red-500/20 text-red-950 dark:text-red-200'

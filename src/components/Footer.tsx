@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
-              Next-generation autonomous customer service agents. Connect your business data, link your tools, and automate resolutions instantly.
+              Build specialized AI agents grounded in your knowledge, connected to your tools, and configured around the work you need them to do.
             </p>
           </div>
 
@@ -68,20 +68,29 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
+                  href="#how-it-works"
+                  onClick={(e) => handleNavClick(e, 'landing', 'how-it-works')}
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  How It Works
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#use-cases"
+                  onClick={(e) => handleNavClick(e, 'landing', 'use-cases')}
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  Use Cases
+                </a>
+              </li>
+              <li>
+                <a
                   href="#pricing"
                   onClick={(e) => handleNavClick(e, 'landing', 'pricing')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#customers"
-                  onClick={(e) => handleNavClick(e, 'landing', 'customers')}
-                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  Customers
                 </a>
               </li>
             </ul>
@@ -95,20 +104,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="#privacy"
+                  href="/privacy-policy"
                   onClick={(e) => handleNavClick(e, 'privacy')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#terms"
-                  onClick={(e) => handleNavClick(e, 'terms')}
-                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  Terms of Service
                 </a>
               </li>
             </ul>
@@ -138,8 +138,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Book a Demo
                 </a>
               </li>
-              <li className="text-xs text-slate-500 dark:text-slate-400 font-medium select-all">
-                support@oriagent.com
+              <li>
+                <a
+                  href="mailto:support@ask-ori.com"
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  support@ask-ori.com
+                </a>
               </li>
             </ul>
           </div>
@@ -152,18 +157,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </p>
           <div className="flex space-x-6">
             <a
-              href="#privacy"
+              href="/privacy-policy"
               onClick={(e) => handleNavClick(e, 'privacy')}
               className="text-[11px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
-              href="#terms"
-              onClick={(e) => handleNavClick(e, 'terms')}
-              className="text-[11px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              Terms of Service
             </a>
           </div>
         </div>
