@@ -7,6 +7,7 @@ import Integrations from './components/Integrations';
 import HowItWorks from './components/HowItWorks';
 import UseCases from './components/UseCases';
 import Pricing from './components/Pricing';
+import PricingPage from './components/PricingPage';
 import Testimonials from './components/Testimonials';
 import ContactUs from './components/ContactUs';
 import Footer from './components/Footer';
@@ -16,12 +17,16 @@ import Onboarding from './components/Onboarding';
 import Dashboard from './components/Dashboard';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import RefundPolicy from './components/RefundPolicy';
 
-export type View = 'landing' | 'signup' | 'login' | 'onboarding' | 'dashboard' | 'privacy' | 'terms' | 'contact';
+export type View = 'landing' | 'signup' | 'login' | 'onboarding' | 'dashboard' | 'privacy' | 'terms' | 'refund' | 'pricing' | 'contact';
 
 const getViewFromPath = (): View => {
   const path = window.location.pathname.toLowerCase();
   if (path === '/privacy-policy' || path === '/privacy') return 'privacy';
+  if (path === '/terms-of-service' || path === '/terms') return 'terms';
+  if (path === '/refund-policy' || path === '/refund') return 'refund';
+  if (path === '/pricing') return 'pricing';
   if (path === '/contact') return 'contact';
   if (path === '/signup') return 'signup';
   if (path === '/login') return 'login';
@@ -34,6 +39,12 @@ const getPathFromView = (view: View): string => {
   switch (view) {
     case 'privacy':
       return '/privacy-policy';
+    case 'terms':
+      return '/terms-of-service';
+    case 'refund':
+      return '/refund-policy';
+    case 'pricing':
+      return '/pricing';
     case 'contact':
       return '/contact';
     case 'signup':
@@ -100,7 +111,6 @@ const App: React.FC = () => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Adjust offset threshold for header overlap
           return rect.top <= 120 && rect.bottom >= 120;
         }
         return false;
@@ -112,8 +122,8 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [view]);
 
-  // Shared Header + Main Page layouts for Landing, Privacy, Terms, Contact
-  const showNavAndFooter = view === 'landing' || view === 'privacy' || view === 'terms' || view === 'contact';
+  // Shared Header + Main Page layouts for Landing, Privacy, Terms, Refund, Pricing, Contact
+  const showNavAndFooter = view === 'landing' || view === 'privacy' || view === 'terms' || view === 'refund' || view === 'pricing' || view === 'contact';
 
   return (
     <div className={`min-h-screen selection:bg-blue-500/30 transition-colors duration-300 ${
@@ -188,8 +198,10 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {view === 'privacy' && <PrivacyPolicy />}
-        {view === 'terms' && <TermsOfService />}
+        {view === 'pricing' && <PricingPage onNavigate={navigateTo} />}
+        {view === 'privacy' && <PrivacyPolicy onNavigate={navigateTo} />}
+        {view === 'terms' && <TermsOfService onNavigate={navigateTo} />}
+        {view === 'refund' && <RefundPolicy onNavigate={navigateTo} />}
         {view === 'contact' && <ContactUs />}
         {view === 'signup' && <SignupPage onNavigate={navigateTo} />}
         {view === 'login' && <LoginPage onNavigate={navigateTo} />}

@@ -50,7 +50,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="#features"
+                  href="/#features"
                   onClick={(e) => handleNavClick(e, 'landing', 'features')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
@@ -59,7 +59,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="#integrations"
+                  href="/#integrations"
                   onClick={(e) => handleNavClick(e, 'landing', 'integrations')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
@@ -68,7 +68,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="#how-it-works"
+                  href="/#how-it-works"
                   onClick={(e) => handleNavClick(e, 'landing', 'how-it-works')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
@@ -77,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="#use-cases"
+                  href="/#use-cases"
                   onClick={(e) => handleNavClick(e, 'landing', 'use-cases')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
@@ -86,8 +86,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="#pricing"
-                  onClick={(e) => handleNavClick(e, 'landing', 'pricing')}
+                  href="/pricing"
+                  onClick={(e) => handleNavClick(e, 'pricing')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
                   Pricing
@@ -111,6 +111,24 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Privacy Policy
                 </a>
               </li>
+              <li>
+                <a
+                  href="/terms-of-service"
+                  onClick={(e) => handleNavClick(e, 'terms')}
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/refund-policy"
+                  onClick={(e) => handleNavClick(e, 'refund')}
+                  className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  Refund Policy
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -122,7 +140,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-2.5">
               <li>
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={(e) => handleNavClick(e, 'contact')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
@@ -131,7 +149,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="#contact"
+                  href="/contact"
                   onClick={(e) => handleNavClick(e, 'contact')}
                   className="text-xs text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
@@ -155,13 +173,27 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <p className="text-[11px] text-slate-400 dark:text-slate-500 font-normal">
             &copy; {currentYear} ORI Agent. All rights reserved.
           </p>
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <a
               href="/privacy-policy"
               onClick={(e) => handleNavClick(e, 'privacy')}
               className="text-[11px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Privacy Policy
+            </a>
+            <a
+              href="/terms-of-service"
+              onClick={(e) => handleNavClick(e, 'terms')}
+              className="text-[11px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="/refund-policy"
+              onClick={(e) => handleNavClick(e, 'refund')}
+              className="text-[11px] text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Refund Policy
             </a>
           </div>
         </div>

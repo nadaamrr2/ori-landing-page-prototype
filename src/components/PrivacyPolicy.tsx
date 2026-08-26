@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
+import { View } from '../App';
 
-const PrivacyPolicy: React.FC = () => {
+interface PrivacyPolicyProps {
+  onNavigate?: (view: View) => void;
+}
+
+const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   useEffect(() => {
     const originalTitle = document.title;
     document.title = 'Privacy Policy | ORI Agent';
