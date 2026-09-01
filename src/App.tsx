@@ -18,11 +18,13 @@ import Dashboard from './components/Dashboard';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 import RefundPolicy from './components/RefundPolicy';
+import { ShopifyAppContainer } from './components/shopify/ShopifyAppContainer';
 
-export type View = 'landing' | 'signup' | 'login' | 'onboarding' | 'dashboard' | 'privacy' | 'terms' | 'refund' | 'pricing' | 'contact';
+export type View = 'landing' | 'shopify' | 'signup' | 'login' | 'onboarding' | 'dashboard' | 'privacy' | 'terms' | 'refund' | 'pricing' | 'contact';
 
 const getViewFromPath = (): View => {
   const path = window.location.pathname.toLowerCase();
+  if (path === '/shopify' || path === '/apps/ori' || path === '/shopify-app') return 'shopify';
   if (path === '/privacy-policy' || path === '/privacy') return 'privacy';
   if (path === '/terms-of-service' || path === '/terms') return 'terms';
   if (path === '/refund-policy' || path === '/refund') return 'refund';
@@ -37,6 +39,10 @@ const getViewFromPath = (): View => {
 
 const getPathFromView = (view: View): string => {
   switch (view) {
+    case 'shopify':
+      return '/shopify';
+    case 'landing':
+      return '/';
     case 'privacy':
       return '/privacy-policy';
     case 'terms':
@@ -153,7 +159,7 @@ const App: React.FC = () => {
 
             <section id="integrations" className="py-24 border-t border-slate-100 dark:border-slate-900/60 relative overflow-hidden">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
-              <Integrations />
+              <Integrations onNavigate={navigateTo} />
             </section>
 
             <section id="how-it-works" className={`py-24 border-t border-slate-100 dark:border-slate-900/60 ${isDarkMode ? 'bg-slate-950/20' : 'bg-slate-50/50'}`}>
@@ -207,6 +213,7 @@ const App: React.FC = () => {
         {view === 'login' && <LoginPage onNavigate={navigateTo} />}
         {view === 'onboarding' && <Onboarding onNavigate={navigateTo} isDarkMode={isDarkMode} />}
         {view === 'dashboard' && <Dashboard onNavigate={navigateTo} isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />}
+        {view === 'shopify' && <ShopifyAppContainer onNavigateToWebsite={() => navigateTo('landing')} />}
       </main>
 
       {showNavAndFooter && <Footer onNavigate={navigateTo} />}

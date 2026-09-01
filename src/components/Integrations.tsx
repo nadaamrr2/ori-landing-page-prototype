@@ -172,7 +172,11 @@ const toolsAndChannels = [
   },
 ];
 
-const Integrations: React.FC = () => {
+interface IntegrationsProps {
+  onNavigate?: (view: any) => void;
+}
+
+const Integrations: React.FC<IntegrationsProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Header */}
@@ -249,10 +253,18 @@ const Integrations: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {toolsAndChannels.map((item, index) => {
               const IconComponent = item.icon;
+              const isShopify = item.name === 'Shopify';
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center p-4 rounded-2xl glass-panel border border-slate-200 dark:border-slate-800/80 hover:border-blue-500/30 dark:hover:border-blue-500/30 hover:shadow-md transition-all duration-300 group text-center"
+                  onClick={() => {
+                    if (isShopify && onNavigate) {
+                      onNavigate('shopify');
+                    }
+                  }}
+                  className={`flex flex-col items-center justify-center p-4 rounded-2xl glass-panel border border-slate-200 dark:border-slate-800/80 hover:border-blue-500/30 dark:hover:border-blue-500/30 hover:shadow-md transition-all duration-300 group text-center ${
+                    isShopify ? 'cursor-pointer ring-1 ring-blue-500/20 hover:ring-blue-500' : ''
+                  }`}
                 >
                   <div className="h-12 w-12 rounded-xl flex items-center justify-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 transition-transform duration-300 group-hover:scale-110 shadow-sm mb-3">
                     {item.isCustomLogo ? (
@@ -261,11 +273,14 @@ const Integrations: React.FC = () => {
                       <IconComponent className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     )}
                   </div>
-                  <h3 className="text-xs font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
-                    {item.name}
+                  <h3 className="text-xs font-bold text-slate-900 dark:text-white tracking-tight leading-snug flex items-center gap-1">
+                    <span>{item.name}</span>
+                    {isShopify && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    )}
                   </h3>
                   <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold tracking-wider uppercase mt-1">
-                    {item.label}
+                    {isShopify ? 'App Prototype' : item.label}
                   </span>
                 </div>
               );

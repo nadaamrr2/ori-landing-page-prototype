@@ -1,6 +1,6 @@
 {
   "name": "ORI Agent",
-  "description": "A high-performance landing page for an AI-native agentic chatbot SaaS, featuring live Gemini-powered demo interactions.",
+  "description": "A high-performance landing page for an AI-native agentic chatbot SaaS, featuring live Gemini-powered demo interactions and Shopify embedded app integration.",
   "requestFramePermissions": [
     "microphone"
   ],
