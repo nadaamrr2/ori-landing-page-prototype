@@ -9,9 +9,9 @@ interface PricingPageProps {
 interface PlanTier {
   id: string;
   name: string;
+  price: string;
   badge?: string;
   description: string;
-  statusLabel: string;
   features: string[];
   ctaText: string;
   ctaAction: 'signup' | 'contact';
@@ -28,8 +28,8 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     {
       id: 'starter',
       name: 'Starter',
+      price: '20',
       description: 'For individuals and small teams getting started with AI agents.',
-      statusLabel: 'Pricing details coming soon',
       features: [
         '1 Active AI Agent',
         'Core Knowledge Base (Files, Documents & URLs)',
@@ -42,11 +42,11 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
       isPopular: false,
     },
     {
-      id: 'pro',
-      name: 'Pro',
+      id: 'growth',
+      name: 'Growth',
+      price: '40',
       badge: 'Recommended',
       description: 'For growing teams that need more agents, integrations, and usage.',
-      statusLabel: 'Pricing details coming soon',
       features: [
         'Multiple Active AI Agents',
         'Expanded Knowledge Base volume & syncing',
@@ -60,10 +60,10 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
       isPopular: true,
     },
     {
-      id: 'business',
-      name: 'Business',
-      description: 'For organizations requiring advanced capabilities and higher usage.',
-      statusLabel: 'Pricing details coming soon',
+      id: 'pro',
+      name: 'Pro',
+      price: '60',
+      description: 'For organizations that need advanced capabilities, more flexibility, and higher usage.',
       features: [
         'Unlimited AI Agents & team workspaces',
         'Custom enterprise knowledge bases & live API tools',
@@ -72,8 +72,8 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
         'Dedicated onboarding & solutions architecture',
         'Enterprise SLA & dedicated support manager',
       ],
-      ctaText: 'Contact Us',
-      ctaAction: 'contact',
+      ctaText: 'Get Started',
+      ctaAction: 'signup',
       isPopular: false,
     },
   ];
@@ -119,26 +119,19 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
                   {plan.name}
                 </h2>
-                <p className="text-slate-600 dark:text-slate-400 text-sm min-h-[44px] leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 text-sm min-h-[44px] leading-relaxed mb-4">
                   {plan.description}
                 </p>
-              </div>
 
-              {/* Status / Coming Soon Indicator */}
-              <div className="mb-8 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                    Plan Status
-                  </span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5 mt-0.5">
-                    <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                    {plan.statusLabel}
-                  </span>
+                {/* Price Display */}
+                <div className="flex items-baseline gap-1.5 pb-2">
+                  <span className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">${plan.price}</span>
+                  <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">/ month</span>
                 </div>
               </div>
 
               {/* Features List Header */}
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 pt-2 border-t border-slate-100 dark:border-slate-800/80">
                 What&apos;s included
               </div>
 

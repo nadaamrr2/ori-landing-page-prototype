@@ -12,13 +12,13 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
     {
       id: 'starter',
       name: 'Starter',
+      price: '20',
       description: 'For individuals and small teams getting started with AI agents.',
-      status: 'Pricing details coming soon',
       features: [
         '1 Active AI Agent',
-        'Core Knowledge Base (Files, Docs & URLs)',
-        'Website Chat Widget',
-        'Standard AI execution speed',
+        'Core Knowledge Base (Files, Documents & URLs)',
+        'Website Chat Widget integration',
+        'Standard AI response speed and execution',
         'Standard email & community support',
       ],
       cta: 'Get Started',
@@ -26,37 +26,37 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
       popular: false,
     },
     {
-      id: 'pro',
-      name: 'Pro',
+      id: 'growth',
+      name: 'Growth',
+      price: '40',
       description: 'For growing teams that need more agents, integrations, and usage.',
-      status: 'Pricing details coming soon',
       features: [
         'Multiple Active AI Agents',
         'Expanded Knowledge Base volume & syncing',
-        'Connected tools (Calendar, Shopify, HubSpot CRM)',
-        'Custom system instructions & guardrails',
-        'Multi-channel deployment (Web, WhatsApp, Slack)',
-        'Priority support & faster turnaround',
+        'Connected tools (Google Calendar, Shopify, HubSpot CRM)',
+        'Custom system instructions, personas & guardrails',
+        'Multi-channel deployment (Website, WhatsApp, Slack)',
+        'Priority support & faster response turnaround',
       ],
       cta: 'Get Started',
       action: 'signup' as const,
       popular: true,
     },
     {
-      id: 'business',
-      name: 'Business',
-      description: 'For organizations requiring advanced capabilities and higher usage.',
-      status: 'Pricing details coming soon',
+      id: 'pro',
+      name: 'Pro',
+      price: '60',
+      description: 'For organizations that need advanced capabilities, more flexibility, and higher usage.',
       features: [
-        'Unlimited AI Agents & workspaces',
-        'Custom enterprise knowledge bases & live APIs',
-        'Role-based permissions & audit oversight',
-        'Custom workflow design & tool connectors',
-        'Dedicated onboarding & architecture guidance',
+        'Unlimited AI Agents & team workspaces',
+        'Custom enterprise knowledge bases & live API tools',
+        'Advanced role-based permissions & audit oversight',
+        'Custom workflow design & tailored tool connectors',
+        'Dedicated onboarding & solutions architecture',
         'Enterprise SLA & dedicated support manager',
       ],
-      cta: 'Contact Us',
-      action: 'contact' as const,
+      cta: 'Get Started',
+      action: 'signup' as const,
       popular: false,
     },
   ];
@@ -100,24 +100,17 @@ const Pricing: React.FC<PricingProps> = ({ onNavigate }) => {
               {/* Header */}
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{tier.name}</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm min-h-[44px] leading-relaxed">{tier.description}</p>
-              </div>
-
-              {/* Status / Coming soon indicator */}
-              <div className="mb-8 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                    Plan Status
-                  </span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5 mt-0.5">
-                    <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                    {tier.status}
-                  </span>
+                <p className="text-slate-600 dark:text-slate-400 text-sm min-h-[44px] leading-relaxed mb-4">{tier.description}</p>
+                
+                {/* Price Display */}
+                <div className="flex items-baseline gap-1.5 pb-2">
+                  <span className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">${tier.price}</span>
+                  <span className="text-sm font-semibold text-slate-500 dark:text-slate-400">/ month</span>
                 </div>
               </div>
 
               {/* Features List Header */}
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4 pt-2 border-t border-slate-100 dark:border-slate-800/80">
                 What&apos;s included
               </div>
 
